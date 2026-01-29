@@ -37,6 +37,7 @@ class HandleConfigScript:
         return dir
     @classmethod
     def add_file(cls,name:str,content:str|bytes):
+        (cls.dest_dir/name).touch(mode=0o755)
         if isinstance(content,str):
             (cls.dest_dir/name).write_text(content)
         elif isinstance(content,bytes):
