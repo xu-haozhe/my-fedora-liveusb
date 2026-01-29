@@ -1,0 +1,10 @@
+<image>
+	<profiles>
+		<profile name="My" description="My">
+			<requires profile="DesktopCommon"/>
+		</profile>
+	</profiles>
+	<packages type="image" patternType="plusRecommended" profiles="My">
+		<package name="code"/>
+	</packages>
+</image>

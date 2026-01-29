@@ -1,0 +1,5 @@
+<image>
+    <repository type="rpm-md" alias="vscode" priority="1">
+    	<source path="https://packages.microsoft.com/yumrepos/vscode/"/>
+	</repository>
+</image>
