@@ -25,7 +25,7 @@ class HandleConfigScript:
 
         config+=f"DIR=/{dirname}\n"
         config+='for script in "$DIR"/* ;do\n'
-        config+='    "$DIR"/script\n'
+        config+='    "$DIR"/"$script"\n'
         config+="done\n\n"
 
         config+=f"rm -rf /{dirname}\n"
