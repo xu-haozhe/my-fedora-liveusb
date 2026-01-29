@@ -40,7 +40,8 @@ jobs:
             dosfstools \
             dnf-plugins-core \
             isomd5sum \
-            erofs-utils
+            erofs-utils \
+            tree 
 
           kiwi-ng --version
 
