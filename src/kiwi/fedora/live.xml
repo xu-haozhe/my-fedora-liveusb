@@ -1,0 +1,79 @@
+<!-- 
+	在 fedora-kiwi-descriptions/components/liveinstall.xml 基础上修改
+	移除了安装器,便于日常使用
+	将 profile 更名为 Live 因为现在它已经没有 install 的作用了
+-->
+
+<image>
+	<profiles>
+		<profile name="Live" description="Live Install ISO">
+			<requires profile="BaseCommon"/>
+			<requires profile="BootCore"/>
+		</profile>
+	</profiles>
+	<preferences profiles="Live" arch="x86_64">
+		<type image="iso"
+			publisher="Fedora Project" volid="Fedora_Linux" application_id="Fedora_Linux"
+			primary="true" flags="dmsquash" filesystem="erofs" erofscompression="lzma,level=6" mediacheck="true"
+			firmware="uefi" efiparttable="gpt" efifatimagesize="30" kernelcmdline="quiet rhgb"
+			fscreateoptions="-Efragments -C 1048576"
+			>
+			<bootloader name="grub2" grub_template="grub-x86.cfg.iso-template" console="console" timeout="10"/>
+		</type>
+	</preferences>
+	<preferences profiles="Live" arch="aarch64">
+		<type image="iso"
+			publisher="Fedora Project" volid="Fedora_Linux" application_id="Fedora_Linux"
+			primary="true" flags="dmsquash" filesystem="erofs" erofscompression="lzma,level=6" mediacheck="true"
+			firmware="uefi" efiparttable="gpt" efifatimagesize="30" kernelcmdline="quiet rhgb"
+			fscreateoptions="-Efragments -C 1048576"
+			>
+			<bootloader name="grub2" grub_template="grub-arm.cfg.iso-template" console="console" timeout="10"/>
+		</type>
+	</preferences>
+	<preferences profiles="Live" arch="riscv64">
+		<type image="iso"
+			publisher="Fedora Project" volid="Fedora_Linux" application_id="Fedora_Linux"
+			primary="true" flags="dmsquash" filesystem="erofs" erofscompression="lzma,level=6" mediacheck="true"
+			firmware="uefi" efiparttable="gpt" efifatimagesize="30" kernelcmdline="quiet rhgb"
+			fscreateoptions="-Efragments -C 1048576"
+			>
+			<bootloader name="grub2" grub_template="grub-riscv64.cfg.iso-template" console="console" timeout="10"/>
+		</type>
+	</preferences>
+	<preferences profiles="Live" arch="ppc64le">
+		<type image="iso"
+			publisher="Fedora Project" volid="Fedora_Linux" application_id="Fedora_Linux"
+			primary="true" flags="dmsquash" filesystem="erofs" erofscompression="lzma,level=6" mediacheck="true"
+			firmware="ofw" kernelcmdline="quiet rhgb"
+			fscreateoptions="-Efragments -C 1048576"
+			>
+			<bootloader name="grub2" grub_template="grub-ppc.cfg.iso-template" console="console" timeout="10"/>
+		</type>
+	</preferences>
+	<packages type="iso" patternType="plusRecommended" profiles="Live">
+		<!-- Filter out unwanted EFI files from the embedded ESP, see rhbz#2358785 -->
+		<file name="iso-esp-excludes.yaml" target="image/exclude_files_efifatimage.yaml"/>
+		<!-- The point of a live image is to install -->
+
+
+		<!-- <namedCollection name="anaconda-tools"/>
+		<package name="anaconda-install-env-deps"/>
+		<package name="anaconda-live"/>  -->
+		<!-- 移除安装器，便于日常使用 -->
+
+		<!-- Need this for SVG release note images -->
+		<package name="aajohan-comfortaa-fonts"/>
+		<package name="dracut-live"/>
+		<package name="glibc-all-langpacks"/>
+		<package name="isomd5sum"/>
+		<package name="kernel"/>
+		<package name="kernel-modules"/>
+		<package name="kernel-modules-extra"/>
+		<package name="livesys-scripts"/>
+		<package name="btrfs-progs"/>
+		<package name="udisks2-btrfs"/>
+		<ignore name="device-mapper-multipath"/>
+		<ignore name="fcoe-utils"/>
+	</packages>
+</image>

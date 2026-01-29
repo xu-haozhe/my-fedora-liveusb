@@ -1,0 +1,21 @@
+<!-- 
+	在 fedora-kiwi-descriptions/teams/workstation.xml 修改
+	将 Workstation-Live 改为依赖没有安装器的 Live，添加对 My 的依赖
+-->
+
+<image>
+	<profiles>
+		<profile name="Workstation-Live" description="Workstation Edition Live DVD">
+			<requires profile="GNOME-Desktop"/>
+			<requires profile="Live"/>
+			<requires profile="My"/>
+		</profile>
+		<profile name="Workstation-Disk" description="Workstation Edition Install Disk">
+			<requires profile="GNOME-Desktop"/>
+			<requires profile="BootDiskCore"/>
+		</profile>
+	</profiles>
+	<packages type="bootstrap" patternType="plusRecommended" profiles="Workstation-Live,Workstation-Disk">
+		<package name="fedora-release-workstation"/>
+	</packages>
+</image>
