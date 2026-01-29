@@ -1,0 +1,77 @@
+name: Build Fedora (f43)
+
+on:
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: 'Image Profile'
+        required: true
+        default: 'Workstation-Live'
+      type:
+        description: 'Image Type'
+        required: true
+        default: 'iso'
+      kiwi_file:
+        description: 'Kiwi config filename'
+        required: true
+        default: 'Fedora.kiwi'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:43 
+      options: --privileged
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          dnf install -y \
+            kiwi-ng \
+            git \
+            python3 \
+            qemu-img \
+            xorriso \
+            parted \
+            dosfstools \
+            dnf-plugins-core \
+            isomd5sum \
+            erofs-utils
+
+          kiwi-ng --version
+
+      - name: Generate kiwi directory
+        run: python3 script/gen_kiwi_dir.py --input src --output kiwi
+
+      - name: Run kiwi-build script
+        run: |
+          IMG_PROFILE="${{ inputs.profile || 'Cloud-Base-Generic' }}"
+          IMG_TYPE="${{ inputs.type || 'iso' }}"
+          KIWI_FILE="${{ inputs.kiwi_file || 'Fedora.kiwi' }}"
+          
+          echo "Building Profile: $IMG_PROFILE ($IMG_TYPE) using $KIWI_FILE"
+          
+          cd kiwi
+          mkdir output
+
+          chmod +x ./kiwi-build
+          ./kiwi-build \
+            --kiwi-file="$KIWI_FILE" \
+            --output-dir=output \
+            --image-type="$IMG_TYPE" \
+            --image-profile="$IMG_PROFILE" \
+            --debug
+
+      - name: list output files
+        run: ls kiwi/output-build/
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fedora-image-${{ inputs.profile || 'auto' }}
+          path: kiwi/output-build/*.iso
+          retention-days: 5
