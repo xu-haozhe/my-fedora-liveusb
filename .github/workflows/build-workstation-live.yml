@@ -45,7 +45,9 @@ jobs:
           kiwi-ng --version
 
       - name: Generate kiwi directory
-        run: python3 script/gen_kiwi_dir.py --input src --output kiwi
+        run: |
+          python3 script/gen_kiwi_dir.py --input src --output kiwi
+          tree kiwi
 
       - name: Run kiwi-build script
         run: |
