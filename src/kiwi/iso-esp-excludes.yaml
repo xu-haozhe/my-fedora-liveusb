@@ -1,0 +1,5 @@
+#fedora-kiwi-descriptions/iso-esp-excludes.yaml
+
+exclude:
+- BOOT/fb*.efi
+- fedora

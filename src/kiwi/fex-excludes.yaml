@@ -1,0 +1,19 @@
+#fedora-kiwi-descriptions/fex-excludes.yaml
+
+exclude:
+- /afs
+- /boot
+- /dev
+- /home
+- /media
+- /mnt
+- /opt
+- /proc
+- /root
+- /run
+- /srv
+- /sys
+- /tmp
+- /usr/lib/locale
+- /usr/share/locale
+- /var
