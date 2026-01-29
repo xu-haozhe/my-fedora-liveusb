@@ -20,20 +20,20 @@
 		<timezone>UTC</timezone>
 		<release-version>43</release-version>
 	</preferences>
-	<include from="this://./repositories/core.xml">
-	<include from="this://./repositories/vscode.xml">
+	<include from="this://./repositories/core.xml"/>
+	<include from="this://./repositories/vscode.xml"/>
 
 
-	<include from="this://./fedora/base-common.xml">
-	<include from="this://./fedora/boot.xml">
-	<include from="this://./fedora/live.xml">
-	<include from="this://./fedora/users.xml">
-	<include from="this://./fedora/desktop-common.xml">
-	<include from="this://./fedora/gnome.xml">
-	<include from="this://./fedora/workstation.xml">
+	<include from="this://./fedora/base-common.xml"/>
+	<include from="this://./fedora/boot.xml"/>
+	<include from="this://./fedora/live.xml"/>
+	<include from="this://./fedora/users.xml"/>
+	<include from="this://./fedora/desktop-common.xml"/>
+	<include from="this://./fedora/gnome.xml"/>
+	<include from="this://./fedora/workstation.xml"/>
 
 
-	<include from="this://./my/app.xml">
+	<include from="this://./my/app.xml"/>
 
 	<packages type="bootstrap">
 		<package name="filesystem"/>
