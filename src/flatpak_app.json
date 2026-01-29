@@ -1,0 +1,10 @@
+{
+    "repositories":{
+        "flathub":"https://dl.flathub.org/repo/flathub.flatpakrepo"
+    },
+    "apps":{
+        "flathub":[
+            "com.github.Anuken.Mindustry"
+        ]
+    }
+}
